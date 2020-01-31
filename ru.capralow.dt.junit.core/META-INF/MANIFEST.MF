@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: ru.capralow.dt.junit.core
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: ru.capralow.dt.junit.core;singleton:=true
+Bundle-Version: 0.3.0.qualifier
+Bundle-Activator: ru.capralow.dt.internal.junit.JUnitCorePlugin
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: 
+ ru.capralow.dt.internal.junit;x-friends:="ru.capralow.dt.junit",
+ ru.capralow.dt.internal.junit.buildpath;core="split"; mandatory:="core";x-friends:="ru.capralow.dt.junit",
+ ru.capralow.dt.internal.junit.launcher;core="split"; mandatory:="core";x-friends:="ru.capralow.dt.junit",
+ ru.capralow.dt.internal.junit.model;x-friends:="ru.capralow.dt.junit",
+ ru.capralow.dt.internal.junit.util;core="split"; mandatory:="core";x-friends:="ru.capralow.dt.junit",
+ ru.capralow.dt.junit,
+ ru.capralow.dt.junit.launcher;core="split"; mandatory:="core",
+ ru.capralow.dt.junit.model
+Require-Bundle: 
+ org.eclipse.core.expressions;bundle-version="[3.4.100,4.0.0)",
+ org.eclipse.core.resources;bundle-version="[3.8.100,4.0.0)",
+ org.eclipse.debug.core;bundle-version="[3.5.0,4.0.0)",
+ org.eclipse.core.runtime;bundle-version="[3.11.0,4.0.0)",
+ ru.capralow.dt.junit.runtime,
+ org.eclipse.core.variables;bundle-version="[3.2.200,4.0.0)",
+ org.eclipse.equinox.simpleconfigurator.manipulator;bundle-version="[2.0.0,3.0.0)",
+ org.eclipse.equinox.frameworkadmin;bundle-version="[2.0.0,3.0.0)"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Import-Package: com._1c.g5.v8.dt.core.platform

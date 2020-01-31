@@ -4,8 +4,6 @@ import java.lang.reflect.Field;
 
 import org.apache.commons.lang.reflect.FieldUtils;
 import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.jdt.internal.junit.ui.TestRunnerViewPart;
-import org.eclipse.jdt.internal.junit.ui.TestViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
@@ -16,6 +14,8 @@ import org.eclipse.ui.PlatformUI;
 
 import com._1c.g5.wiring.IManagedService;
 
+import ru.capralow.dt.internal.junit.ui.TestRunnerViewPart;
+import ru.capralow.dt.internal.junit.ui.TestViewer;
 import ru.capralow.dt.unit.launcher.plugin.internal.ui.junit.ShowJUnitResult;
 import ru.capralow.dt.unit.launcher.plugin.internal.ui.junit.TestCaseListener;
 

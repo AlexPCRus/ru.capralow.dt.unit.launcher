@@ -1,11 +1,11 @@
 package ru.capralow.dt.unit.launcher.plugin.internal.ui.junit;
 
-import org.eclipse.jdt.junit.model.ITestCaseElement;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 
+import ru.capralow.dt.junit.model.ITestCaseElement;
 import ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherUiPlugin;
 
 public class TestCaseListener extends SelectionAdapter {

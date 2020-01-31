@@ -10,13 +10,13 @@ import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.jdt.junit.JUnitCore;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import com.google.common.base.Strings;
 
+import ru.capralow.dt.junit.JUnitCore;
 import ru.capralow.dt.unit.launcher.plugin.core.UnitTestLaunchConfigurationAttributes;
 import ru.capralow.dt.unit.launcher.plugin.core.frameworks.FrameworkUtils;
 import ru.capralow.dt.unit.launcher.plugin.internal.ui.UnitLauncherUiPlugin;

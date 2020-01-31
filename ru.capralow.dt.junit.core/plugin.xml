@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension-point id="ru.capralow.dt.junit.testRunListeners" name="%testRunListeners.name" schema="schema/testRunListeners.exsd"/>
+   <extension-point id="ru.capralow.dt.junit.internal_testKinds" name="%testKinds.name" schema="schema/internal_testKinds.exsd"/>
+
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            name="%Launch.label"
+            delegateDescription="%JUnitLaunchDelegate.description"
+            delegateName="%JUnitLaunchDelegate.name"
+            allowCommandLine="true"
+            delegate="ru.capralow.dt.junit.launcher.AdvancedJUnitLaunchConfigurationDelegate"
+            modes="run, debug"
+            id="ru.capralow.dt.junit.launchconfig"
+            sourceLocatorId="org.eclipse.jdt.launching.sourceLocator.JavaSourceLookupDirector"
+            sourcePathComputerId="org.eclipse.jdt.launching.sourceLookup.javaSourcePathComputer"
+            migrationDelegate="ru.capralow.dt.internal.junit.launcher.JUnitMigrationDelegate">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationComparators">
+      <launchConfigurationComparator
+            attribute="ru.capralow.dt.junit.CONTAINER"
+            class="ru.capralow.dt.internal.junit.launcher.ContainerComparator"
+            id="ru.capralow.dt.junit.containerComparator">
+      </launchConfigurationComparator>
+   </extension>
+   
+   <extension
+         point="org.eclipse.jdt.core.classpathVariableInitializer">
+      <classpathVariableInitializer
+            variable="JUNIT_HOME"
+            class="ru.capralow.dt.internal.junit.buildpath.JUnitHomeInitializer"
+            deprecated="%classpathVariableInitializer.deprecated.JUNIT_HOME"
+            readOnly="true">
+      </classpathVariableInitializer>
+      <classpathVariableInitializer
+            variable="JUNIT_SRC_HOME"
+            class="ru.capralow.dt.internal.junit.buildpath.JUnitHomeInitializer"
+            deprecated="%classpathVariableInitializer.deprecated.JUNIT_SRC_HOME"
+            readOnly="true">
+      </classpathVariableInitializer>
+   </extension>
+         
+   <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            properties="isTest,canLaunchAsJUnit"
+            namespace="ru.capralow.dt.junit"
+            type="org.eclipse.core.runtime.IAdaptable"
+            class="ru.capralow.dt.internal.junit.JUnitPropertyTester"
+            id="ru.capralow.dt.junit.JUnitPropertyTester">
+      </propertyTester>
+   </extension>
+
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer class="ru.capralow.dt.internal.junit.JunitPreferenceInitializer"/>
+   </extension>
+   
+    <!-- JUnit Container -->
+   
+   <extension
+      point="org.eclipse.jdt.core.classpathContainerInitializer">
+      <classpathContainerInitializer
+            class="ru.capralow.dt.internal.junit.buildpath.JUnitContainerInitializer"
+            id="ru.capralow.dt.junit.JUNIT_CONTAINER">
+      </classpathContainerInitializer>
+   </extension>
+   
+   <extension
+         point="ru.capralow.dt.junit.internal_testKinds">
+      <kind
+            id="ru.capralow.dt.junit.loader.junit3"
+            displayName="%testKind.junit3"
+            finderClass="ru.capralow.dt.internal.junit.launcher.JUnit3TestFinder"
+            loaderPluginId="ru.capralow.dt.junit.runtime"
+            loaderClass="ru.capralow.dt.internal.junit.runner.junit3.JUnit3TestLoader">
+         <runtimeClasspathEntry pluginId="ru.capralow.dt.junit.runtime"/>     	
+      </kind>
+   </extension>
+   <extension
+         point="ru.capralow.dt.junit.internal_testKinds">
+      <kind
+            id="ru.capralow.dt.junit.loader.junit4"
+            displayName="%testKind.junit4" 
+            finderClass="ru.capralow.dt.internal.junit.launcher.JUnit4TestFinder"
+            loaderPluginId="ru.capralow.dt.junit4.runtime"
+            loaderClass="ru.capralow.dt.internal.junit4.runner.JUnit4TestLoader">
+         <runtimeClasspathEntry pluginId="ru.capralow.dt.junit4.runtime" />
+         <runtimeClasspathEntry pluginId="ru.capralow.dt.junit.runtime"/>     	
+      </kind>
+   </extension>
+      <extension
+         point="ru.capralow.dt.junit.internal_testKinds">
+      <kind
+            id="ru.capralow.dt.junit.loader.junit5"
+            displayName="%testKind.junit5"
+            finderClass="ru.capralow.dt.internal.junit.launcher.JUnit5TestFinder"
+            loaderPluginId="ru.capralow.dt.junit5.runtime"
+            loaderClass="ru.capralow.dt.internal.junit5.runner.JUnit5TestLoader">
+         <runtimeClasspathEntry pluginId="ru.capralow.dt.junit5.runtime" />
+         <runtimeClasspathEntry pluginId="ru.capralow.dt.junit.runtime" />
+      </kind>
+   </extension>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            base-type="org.eclipse.core.runtime.xml"
+            file-extensions="xml"
+            id="ru.capralow.dt.junit.JUnitResult"
+            name="%JUnitTestResult.content-type.name"
+            priority="high">
+         <describer
+               class="org.eclipse.core.runtime.content.XMLRootElementContentDescriber2">
+            <parameter
+                  name="element"
+                  value="testrun">
+            </parameter>
+            <parameter
+                  name="element"
+                  value="testsuite">
+            </parameter>
+            <parameter
+                  name="element"
+                  value="testsuites">
+            </parameter>
+         </describer>
+      </content-type>
+   </extension>   
+</plugin>
