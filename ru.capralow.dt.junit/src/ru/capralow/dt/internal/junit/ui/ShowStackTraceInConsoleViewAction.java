@@ -14,15 +14,14 @@
 package ru.capralow.dt.internal.junit.ui;
 
 import org.eclipse.jdt.debug.ui.console.JavaStackTraceConsoleFactory;
-
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 
-import org.eclipse.jdt.internal.junit.model.TestElement;
+import ru.capralow.dt.internal.junit.model.TestElement;
 
 /**
- * Action to show the stack trace of a failed test from JUnit view's failure trace in debug's Java
- * stack trace console.
+ * Action to show the stack trace of a failed test from JUnit view's failure
+ * trace in debug's Java stack trace console.
  */
 public class ShowStackTraceInConsoleViewAction extends Action {
 
@@ -38,16 +37,16 @@ public class ShowStackTraceInConsoleViewAction extends Action {
 		setHoverImageDescriptor(JUnitPlugin.getImageDescriptor("elcl16/open_console.png")); //$NON-NLS-1$
 		setImageDescriptor(JUnitPlugin.getImageDescriptor("elcl16/open_console.png")); //$NON-NLS-1$
 
-		fView= view;
+		fView = view;
 	}
 
 	@Override
 	public void run() {
-		TestElement failedTest= fView.getFailedTest();
-		String stackTrace= failedTest.getTrace();
+		TestElement failedTest = fView.getFailedTest();
+		String stackTrace = failedTest.getTrace();
 		if (stackTrace != null) {
 			if (fFactory == null) {
-				fFactory= new JavaStackTraceConsoleFactory();
+				fFactory = new JavaStackTraceConsoleFactory();
 			}
 			fFactory.openConsole(stackTrace);
 		}

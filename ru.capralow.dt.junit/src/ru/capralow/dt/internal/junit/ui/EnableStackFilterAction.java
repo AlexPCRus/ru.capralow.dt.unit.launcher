@@ -13,12 +13,10 @@
  *******************************************************************************/
 package ru.capralow.dt.internal.junit.ui;
 
-
 import org.eclipse.jface.action.Action;
-
 import org.eclipse.ui.PlatformUI;
 
-import org.eclipse.jdt.internal.junit.JUnitPreferencesConstants;
+import ru.capralow.dt.internal.junit.JUnitPreferencesConstants;
 
 /**
  * Action to enable/disable stack trace filtering.
@@ -37,7 +35,7 @@ public class EnableStackFilterAction extends Action {
 		setImageDescriptor(JUnitPlugin.getImageDescriptor("elcl16/cfilter.png")); //$NON-NLS-1$
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(this, IJUnitHelpContextIds.ENABLEFILTER_ACTION);
 
-		fView= view;
+		fView = view;
 		setChecked(JUnitPreferencesConstants.getFilterStack());
 	}
 

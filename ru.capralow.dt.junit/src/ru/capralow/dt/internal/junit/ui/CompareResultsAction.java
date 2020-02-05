@@ -13,13 +13,11 @@
  *******************************************************************************/
 package ru.capralow.dt.internal.junit.ui;
 
-
+import org.eclipse.jface.action.Action;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 
-import org.eclipse.jface.action.Action;
-
-import org.eclipse.jdt.internal.junit.model.TestElement;
+import ru.capralow.dt.internal.junit.model.TestElement;
 
 /**
  * Action to enable/disable stack trace filtering.
@@ -34,11 +32,12 @@ public class CompareResultsAction extends Action {
 		setDescription(JUnitMessages.CompareResultsAction_description);
 		setToolTipText(JUnitMessages.CompareResultsAction_tooltip);
 
-		setDisabledImageDescriptor(JUnitPlugin.getImageDescriptor("dlcl16/compare.png"));  //$NON-NLS-1$
-		setHoverImageDescriptor(JUnitPlugin.getImageDescriptor("elcl16/compare.png"));  //$NON-NLS-1$
-		setImageDescriptor(JUnitPlugin.getImageDescriptor("elcl16/compare.png"));  //$NON-NLS-1$
-		//PlatformUI.getWorkbench().getHelpSystem().setHelp(this, IJUnitHelpContextIds.ENABLEFILTER_ACTION);
-		fView= view;
+		setDisabledImageDescriptor(JUnitPlugin.getImageDescriptor("dlcl16/compare.png")); //$NON-NLS-1$
+		setHoverImageDescriptor(JUnitPlugin.getImageDescriptor("elcl16/compare.png")); //$NON-NLS-1$
+		setImageDescriptor(JUnitPlugin.getImageDescriptor("elcl16/compare.png")); //$NON-NLS-1$
+		// PlatformUI.getWorkbench().getHelpSystem().setHelp(this,
+		// IJUnitHelpContextIds.ENABLEFILTER_ACTION);
+		fView = view;
 	}
 
 	/*
@@ -46,18 +45,18 @@ public class CompareResultsAction extends Action {
 	 */
 	@Override
 	public void run() {
-		TestElement failedTest= fView.getFailedTest();
+		TestElement failedTest = fView.getFailedTest();
 		if (fOpenDialog != null) {
 			fOpenDialog.setInput(failedTest);
 			fOpenDialog.getShell().setActive();
 
 		} else {
-			fOpenDialog= new CompareResultDialog(fView.getShell(), failedTest);
+			fOpenDialog = new CompareResultDialog(fView.getShell(), failedTest);
 			fOpenDialog.create();
 			fOpenDialog.getShell().addDisposeListener(new DisposeListener() {
 				@Override
 				public void widgetDisposed(DisposeEvent e) {
-					fOpenDialog= null;
+					fOpenDialog = null;
 				}
 			});
 			fOpenDialog.setBlockOnOpen(false);

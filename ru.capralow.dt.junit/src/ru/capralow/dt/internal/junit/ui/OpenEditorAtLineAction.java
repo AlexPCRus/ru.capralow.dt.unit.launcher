@@ -16,16 +16,12 @@
 package ru.capralow.dt.internal.junit.ui;
 
 import org.eclipse.core.runtime.CoreException;
-
-import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.IDocument;
-
-import org.eclipse.ui.PlatformUI;
-
-import org.eclipse.ui.texteditor.ITextEditor;
-
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.texteditor.ITextEditor;
 
 /**
  * Open a test in the Java editor and reveal a given line
@@ -37,24 +33,25 @@ public class OpenEditorAtLineAction extends OpenEditorAction {
 	public OpenEditorAtLineAction(TestRunnerViewPart testRunner, String className, int line) {
 		super(testRunner, className);
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(this, IJUnitHelpContextIds.OPENEDITORATLINE_ACTION);
-		fLineNumber= line;
+		fLineNumber = line;
+	}
+
+	@Override
+	protected IJavaElement findElement(IJavaProject project, String className) throws CoreException {
+		return findType(project, className);
 	}
 
 	@Override
 	protected void reveal(ITextEditor textEditor) {
 		if (fLineNumber >= 0) {
 			try {
-				IDocument document= textEditor.getDocumentProvider().getDocument(textEditor.getEditorInput());
-				textEditor.selectAndReveal(document.getLineOffset(fLineNumber-1), document.getLineLength(fLineNumber-1));
+				IDocument document = textEditor.getDocumentProvider().getDocument(textEditor.getEditorInput());
+				textEditor.selectAndReveal(document.getLineOffset(fLineNumber - 1),
+						document.getLineLength(fLineNumber - 1));
 			} catch (BadLocationException x) {
 				// marker refers to invalid text position -> do nothing
 			}
 		}
-	}
-
-	@Override
-	protected IJavaElement findElement(IJavaProject project, String className) throws CoreException {
-		return findType(project, className);
 	}
 
 }

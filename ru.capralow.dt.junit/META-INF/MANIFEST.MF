@@ -36,3 +36,4 @@ Require-Bundle:
  com.ibm.icu;bundle-version="4.4.2",
  ru.capralow.dt.junit.core
 Bundle-RequiredExecutionEnvironment: JavaSE-11
+Import-Package: com._1c.g5.v8.dt.core.platform

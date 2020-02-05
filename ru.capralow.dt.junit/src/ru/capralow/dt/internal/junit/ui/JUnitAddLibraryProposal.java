@@ -16,104 +16,58 @@ package ru.capralow.dt.internal.junit.ui;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.widgets.Shell;
-
-import ru.capralow.dt.internal.junit.buildpath.BuildPathSupport;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-
-import org.eclipse.jface.dialogs.ErrorDialog;
-import org.eclipse.jface.operation.IRunnableContext;
-import org.eclipse.jface.operation.IRunnableWithProgress;
-
-import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.contentassist.IContextInformation;
-
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaModelException;
-
-import org.eclipse.jdt.internal.junit.JUnitCorePlugin;
-import org.eclipse.jdt.ui.ISharedImages;
+import org.eclipse.jdt.internal.ui.util.BusyIndicatorRunnableContext;
 import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.jdt.ui.text.java.IInvocationContext;
 import org.eclipse.jdt.ui.text.java.IJavaCompletionProposal;
+import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.jface.operation.IRunnableContext;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.contentassist.IContextInformation;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.ISharedImages;
 
-import org.eclipse.jdt.internal.ui.util.BusyIndicatorRunnableContext;
+import ru.capralow.dt.internal.junit.JUnitCorePlugin;
+import ru.capralow.dt.internal.junit.buildpath.BuildPathSupport;
 
 public final class JUnitAddLibraryProposal implements IJavaCompletionProposal {
 
-	private final IInvocationContext fContext;
-	private final boolean fIsJunit4;
-	private final int fRelevance;
-
-	public JUnitAddLibraryProposal(boolean isJunit4, IInvocationContext context, int relevance) {
-		fIsJunit4= isJunit4;
-		fContext= context;
-		fRelevance= relevance;
-	}
-
-	@Override
-	public int getRelevance() {
-		return fRelevance;
-	}
-
-	@Override
-	public void apply(IDocument document) {
-		IJavaProject project= fContext.getCompilationUnit().getJavaProject();
-		Shell shell= JUnitPlugin.getActiveWorkbenchShell();
-		try {
-			IClasspathEntry entry= null;
-			if (fIsJunit4) {
-				entry= BuildPathSupport.getJUnit4ClasspathEntry();
-			} else {
-				entry= BuildPathSupport.getJUnit3ClasspathEntry();
-			}
-			if (entry != null) {
-				addToClasspath(shell, project, entry, new BusyIndicatorRunnableContext());
-			}
-			// force a reconcile
-			int offset= fContext.getSelectionOffset();
-			int length= fContext.getSelectionLength();
-			String s= document.get(offset, length);
-			document.replace(offset, length, s);
-		} catch (CoreException e) {
-			ErrorDialog.openError(shell, JUnitMessages.JUnitAddLibraryProposal_title, JUnitMessages.JUnitAddLibraryProposal_cannotAdd, e.getStatus());
-		} catch (BadLocationException e) {
-			//ignore
-		}
-	}
-
-	private static boolean addToClasspath(Shell shell, final IJavaProject project, IClasspathEntry entry, IRunnableContext context) throws JavaModelException {
-		IClasspathEntry[] oldEntries= project.getRawClasspath();
-		ArrayList<IClasspathEntry> newEntries= new ArrayList<>(oldEntries.length + 1);
-		boolean added= false;
+	private static boolean addToClasspath(Shell shell, final IJavaProject project, IClasspathEntry entry,
+			IRunnableContext context) throws JavaModelException {
+		IClasspathEntry[] oldEntries = project.getRawClasspath();
+		ArrayList<IClasspathEntry> newEntries = new ArrayList<>(oldEntries.length + 1);
+		boolean added = false;
 		for (IClasspathEntry curr : oldEntries) {
 			if (curr.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
-				IPath path= curr.getPath();
+				IPath path = curr.getPath();
 				if (path.equals(entry.getPath())) {
 					return true; // already on build path
 				} else if (path.matchingFirstSegments(entry.getPath()) > 0) {
 					if (!added) {
-						curr= entry; // replace
-						added= true;
+						curr = entry; // replace
+						added = true;
 					} else {
-						curr= null;
+						curr = null;
 					}
 				}
 			} else if (curr.getEntryKind() == IClasspathEntry.CPE_VARIABLE) {
-				IPath path= curr.getPath();
+				IPath path = curr.getPath();
 				if (path.segmentCount() > 0 && JUnitCorePlugin.JUNIT_HOME.equals(path.segment(0))) {
 					if (!added) {
-						curr= entry; // replace
-						added= true;
+						curr = entry; // replace
+						added = true;
 					} else {
-						curr= null;
+						curr = null;
 					}
 				}
 			}
@@ -125,8 +79,9 @@ public final class JUnitAddLibraryProposal implements IJavaCompletionProposal {
 			newEntries.add(entry);
 		}
 
-		final IClasspathEntry[] newCPEntries= newEntries.toArray(new IClasspathEntry[newEntries.size()]);
-		// fix for 64974 OCE in New JUnit Test Case wizard while workspace is locked [JUnit]
+		final IClasspathEntry[] newCPEntries = newEntries.toArray(new IClasspathEntry[newEntries.size()]);
+		// fix for 64974 OCE in New JUnit Test Case wizard while workspace is locked
+		// [JUnit]
 		try {
 			context.run(true, false, new IRunnableWithProgress() {
 				@Override
@@ -142,7 +97,10 @@ public final class JUnitAddLibraryProposal implements IJavaCompletionProposal {
 		} catch (InvocationTargetException e) {
 			Throwable t = e.getTargetException();
 			if (t instanceof CoreException) {
-				ErrorDialog.openError(shell, JUnitMessages.JUnitAddLibraryProposal_title, JUnitMessages.JUnitAddLibraryProposal_cannotAdd, ((CoreException)t).getStatus());
+				ErrorDialog.openError(shell,
+						JUnitMessages.JUnitAddLibraryProposal_title,
+						JUnitMessages.JUnitAddLibraryProposal_cannotAdd,
+						((CoreException) t).getStatus());
 			}
 			return false;
 		} catch (InterruptedException e) {
@@ -151,9 +109,44 @@ public final class JUnitAddLibraryProposal implements IJavaCompletionProposal {
 
 	}
 
+	private final IInvocationContext fContext;
+	private final boolean fIsJunit4;
+
+	private final int fRelevance;
+
+	public JUnitAddLibraryProposal(boolean isJunit4, IInvocationContext context, int relevance) {
+		fIsJunit4 = isJunit4;
+		fContext = context;
+		fRelevance = relevance;
+	}
+
 	@Override
-	public Point getSelection(IDocument document) {
-		return new Point(fContext.getSelectionOffset(), fContext.getSelectionLength());
+	public void apply(IDocument document) {
+		IJavaProject project = fContext.getCompilationUnit().getJavaProject();
+		Shell shell = JUnitPlugin.getActiveWorkbenchShell();
+		try {
+			IClasspathEntry entry = null;
+			if (fIsJunit4) {
+				entry = BuildPathSupport.getJUnit4ClasspathEntry();
+			} else {
+				entry = BuildPathSupport.getJUnit3ClasspathEntry();
+			}
+			if (entry != null) {
+				addToClasspath(shell, project, entry, new BusyIndicatorRunnableContext());
+			}
+			// force a reconcile
+			int offset = fContext.getSelectionOffset();
+			int length = fContext.getSelectionLength();
+			String s = document.get(offset, length);
+			document.replace(offset, length, s);
+		} catch (CoreException e) {
+			ErrorDialog.openError(shell,
+					JUnitMessages.JUnitAddLibraryProposal_title,
+					JUnitMessages.JUnitAddLibraryProposal_cannotAdd,
+					e.getStatus());
+		} catch (BadLocationException e) {
+			// ignore
+		}
 	}
 
 	@Override
@@ -162,6 +155,11 @@ public final class JUnitAddLibraryProposal implements IJavaCompletionProposal {
 			return JUnitMessages.JUnitAddLibraryProposal_junit4_info;
 		}
 		return JUnitMessages.JUnitAddLibraryProposal_info;
+	}
+
+	@Override
+	public IContextInformation getContextInformation() {
+		return null;
 	}
 
 	@Override
@@ -178,7 +176,12 @@ public final class JUnitAddLibraryProposal implements IJavaCompletionProposal {
 	}
 
 	@Override
-	public IContextInformation getContextInformation() {
-		return null;
+	public int getRelevance() {
+		return fRelevance;
+	}
+
+	@Override
+	public Point getSelection(IDocument document) {
+		return new Point(fContext.getSelectionOffset(), fContext.getSelectionLength());
 	}
 }

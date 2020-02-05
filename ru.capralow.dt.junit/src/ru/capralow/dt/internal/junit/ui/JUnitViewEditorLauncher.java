@@ -16,12 +16,10 @@ package ru.capralow.dt.internal.junit.ui;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-
 import org.eclipse.ui.IEditorLauncher;
 
+import ru.capralow.dt.internal.junit.model.JUnitModel;
 import ru.capralow.dt.internal.junit.util.ExceptionHandler;
-
-import org.eclipse.jdt.internal.junit.model.JUnitModel;
 
 public class JUnitViewEditorLauncher implements IEditorLauncher {
 
@@ -31,7 +29,9 @@ public class JUnitViewEditorLauncher implements IEditorLauncher {
 			JUnitPlugin.getActivePage().showView(TestRunnerViewPart.NAME);
 			JUnitModel.importTestRunSession(file.toFile());
 		} catch (CoreException e) {
-			ExceptionHandler.handle(e, JUnitMessages.JUnitViewEditorLauncher_dialog_title, JUnitMessages.JUnitViewEditorLauncher_error_occurred);
+			ExceptionHandler.handle(e,
+					JUnitMessages.JUnitViewEditorLauncher_dialog_title,
+					JUnitMessages.JUnitViewEditorLauncher_error_occurred);
 		}
 	}
 
