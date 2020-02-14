@@ -2,478 +2,461 @@
 <?eclipse version="3.0"?>
 <plugin>
 
-   <extension-point id="junitLaunchConfigs" name="%junitLaunchConfigs.name" schema="schema/junitLaunchConfigs.exsd"/>
+	<extension-point id="junitLaunchConfigs" name="%junitLaunchConfigs.name" schema="schema/junitLaunchConfigs.exsd"/>
 
-   <extension
-         point="org.eclipse.ui.views">
-      <view
-            name="%View.label"
-            icon="$nl$/icons/full/eview16/junit.png"
-            category="org.eclipse.jdt.ui.java"
-            fastViewWidthRatio="0.40"
-            class="ru.capralow.dt.internal.junit.ui.TestRunnerViewPart"
-            id="ru.capralow.dt.junit.ResultView">
-      </view>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension
-            targetID="org.eclipse.jdt.ui.JavaPerspective">
-         <view
-               relative="org.eclipse.jdt.ui.PackageExplorer"
-               visible="false"
-               id="ru.capralow.dt.junit.ResultView"
-               relationship="stack">
-         </view>
-         <newWizardShortcut
-               id="ru.capralow.dt.junit.wizards.NewTestCaseCreationWizard">
-         </newWizardShortcut>
-      </perspectiveExtension>
-      <perspectiveExtension
-            targetID="org.eclipse.jdt.ui.JavaPerspective">
-         <actionSet
-               id="ru.capralow.dt.junit.JUnitActionSet">
-         </actionSet>
-      </perspectiveExtension>
-      <perspectiveExtension
-            targetID="org.eclipse.jdt.ui.JavaBrowsingPerspective">
-         <actionSet
-               id="ru.capralow.dt.junit.JUnitActionSet">
-         </actionSet>
-         <newWizardShortcut
-               id="ru.capralow.dt.junit.wizards.NewTestCaseCreationWizard">
-         </newWizardShortcut>
-      </perspectiveExtension>
-      <perspectiveExtension
-            targetID="org.eclipse.debug.ui.DebugPerspective">
-         <view
-               relative="org.eclipse.debug.ui.DebugView"
-               visible="false"
-               id="ru.capralow.dt.junit.ResultView"
-               relationship="stack">
-         </view>
-         <viewShortcut
-               id="ru.capralow.dt.junit.ResultView">
-         </viewShortcut>
-      </perspectiveExtension>
-   </extension>
-   <extension
-         point="org.eclipse.ui.preferencePages">
-      <page
-            name="%PreferencePage.label"
-            category="org.eclipse.jdt.ui.preferences.JavaBasePreferencePage"
-            class="ru.capralow.dt.internal.junit.ui.JUnitPreferencePage"
-            id="ru.capralow.dt.junit.preferences">
-         <keywordReference id="ru.capralow.dt.junit.JUnit"/>
-      </page>
-   </extension>
-   <extension
-         point="org.eclipse.ui.keywords">
-      <keyword
-            id="ru.capralow.dt.junit.JUnit"
-            label="%preferenceKeywords.general"/>
-     <keyword
-            id="ru.capralow.dt.junit.wizards.java"
-            label="%preferenceKeywords.wizards.java"/>
-   </extension>
-   <extension
-         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
-      <launchConfigurationTypeImage
-            icon="$nl$/icons/full/obj16/julaunch.png"
-            configTypeID="ru.capralow.dt.junit.launchconfig"
-            id="ru.capralow.dt.junit.launchimage">
-      </launchConfigurationTypeImage>
-   </extension>
-   <extension
-         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
-      <launchConfigurationTabGroup
-            type="ru.capralow.dt.junit.launchconfig"
-            helpContextId="ru.capralow.dt.junit.junit_tab_group"
-            class="ru.capralow.dt.internal.junit.launcher.JUnitTabGroup"
-            id="ru.capralow.dt.junit.launchConfigurationTabGroup.junit">
-         <launchMode
-               perspective="org.eclipse.debug.ui.DebugPerspective"
-               description="%JUnitTabGroupDescription.debug"
-               mode="debug">
-         </launchMode>
-         <launchMode
-               description="%JUnitTabGroupDescription.run"
-               mode="run">
-         </launchMode>
-      </launchConfigurationTabGroup>
-   </extension>
-   <extension
-         point="org.eclipse.ui.newWizards">
-      <category
-            name="%WizardCategory.name"
-            parentCategory="org.eclipse.jdt.ui.java"
-            id="ru.capralow.dt.junit">
-      </category>
-      <wizard
-            name="%TestCaseWizard.name"
-            icon="$nl$/icons/full/etool16/new_testcase.png"
-            category="org.eclipse.jdt.ui.java/ru.capralow.dt.junit"
-            id="ru.capralow.dt.junit.wizards.NewTestCaseCreationWizard">
-         <class
-               class="org.eclipse.jdt.internal.junit.wizards.NewTestCaseCreationWizard">
-            <parameter
-                  name="javatype"
-                  value="true">
-            </parameter>
-         </class>
+	<extension
+			point="org.eclipse.ui.views">
+		<view
+				name="%View.label"
+				icon="$nl$/icons/full/eview16/junit.png"
+				category="org.eclipse.jdt.ui.java"
+				fastViewWidthRatio="0.40"
+				class="ru.capralow.dt.internal.junit.ui.TestRunnerViewPart"
+				id="ru.capralow.dt.junit.ResultView">
+		</view>
+	</extension>
+	
+	<extension
+			point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension
+				targetID="org.eclipse.jdt.ui.JavaPerspective">
+			<view
+					relative="org.eclipse.jdt.ui.PackageExplorer"
+					visible="false"
+					id="ru.capralow.dt.junit.ResultView"
+					relationship="stack">
+			</view>
+			<newWizardShortcut
+					id="ru.capralow.dt.junit.wizards.NewTestCaseCreationWizard">
+			</newWizardShortcut>
+		</perspectiveExtension>
+		<perspectiveExtension
+				targetID="org.eclipse.jdt.ui.JavaPerspective">
+			<actionSet
+					id="ru.capralow.dt.junit.JUnitActionSet">
+			</actionSet>
+		</perspectiveExtension>
+		<perspectiveExtension
+				targetID="org.eclipse.jdt.ui.JavaBrowsingPerspective">
+			<actionSet
+					id="ru.capralow.dt.junit.JUnitActionSet">
+			</actionSet>
+			<newWizardShortcut
+					id="ru.capralow.dt.junit.wizards.NewTestCaseCreationWizard">
+			</newWizardShortcut>
+		</perspectiveExtension>
+		<perspectiveExtension
+				targetID="org.eclipse.debug.ui.DebugPerspective">
+			<view
+					relative="org.eclipse.debug.ui.DebugView"
+					visible="false"
+					id="ru.capralow.dt.junit.ResultView"
+					relationship="stack">
+			</view>
+			<viewShortcut
+					id="ru.capralow.dt.junit.ResultView">
+			</viewShortcut>
+		</perspectiveExtension>
+	</extension>
+	
+	<extension
+			point="org.eclipse.ui.preferencePages">
+		<page
+				name="%PreferencePage.label"
+				category="org.eclipse.jdt.ui.preferences.JavaBasePreferencePage"
+				class="ru.capralow.dt.internal.junit.ui.JUnitPreferencePage"
+				id="ru.capralow.dt.junit.preferences">
+			<keywordReference id="ru.capralow.dt.junit.JUnit"/>
+		</page>
+	</extension>
+	
+	<extension
+			point="org.eclipse.ui.keywords">
+		<keyword
+				id="ru.capralow.dt.junit.JUnit"
+				label="%preferenceKeywords.general"/>
+	  <keyword
+				id="ru.capralow.dt.junit.wizards.java"
+				label="%preferenceKeywords.wizards.java"/>
+	</extension>
+	
+	<extension
+			point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage
+				icon="$nl$/icons/full/obj16/julaunch.png"
+				configTypeID="ru.capralow.dt.junit.launchconfig"
+				id="ru.capralow.dt.junit.launchimage">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension
+			point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup
+				type="ru.capralow.dt.junit.launchconfig"
+				helpContextId="ru.capralow.dt.junit.junit_tab_group"
+				class="ru.capralow.dt.internal.junit.launcher.JUnitTabGroup"
+				id="ru.capralow.dt.junit.launchConfigurationTabGroup.junit">
+			<launchMode
+					perspective="org.eclipse.debug.ui.DebugPerspective"
+					description="%JUnitTabGroupDescription.debug"
+					mode="debug">
+			</launchMode>
+			<launchMode
+					description="%JUnitTabGroupDescription.run"
+					mode="run">
+			</launchMode>
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension
+			point="org.eclipse.ui.newWizards">
+		<category
+				name="%WizardCategory.name"
+				parentCategory="org.eclipse.jdt.ui.java"
+				id="ru.capralow.dt.junit">
+		</category>
+		<wizard
+				name="%TestCaseWizard.name"
+				icon="$nl$/icons/full/etool16/new_testcase.png"
+				category="org.eclipse.jdt.ui.java/ru.capralow.dt.junit"
+				id="ru.capralow.dt.junit.wizards.NewTestCaseCreationWizard">
+			<class
+					class="org.eclipse.jdt.internal.junit.wizards.NewTestCaseCreationWizard">
+				<parameter
+						name="javatype"
+						value="true">
+				</parameter>
+			</class>
 <!-- see bug 48164 for wrong pde compiler warnings -->
-         <description>
-            %TestWizard.description
-         </description>
-         <keywordReference id="ru.capralow.dt.junit.wizards.java"/>
-      </wizard>
-      <wizard
-            name="%TestSuiteWizard.name"
-            icon="$nl$/icons/full/etool16/new_testsuite.png"
-            category="org.eclipse.jdt.ui.java/ru.capralow.dt.junit"
-            class="ru.capralow.dt.internal.junit.wizards.NewTestSuiteCreationWizard"
-            id="ru.capralow.dt.junit.wizards.NewTestSuiteCreationWizard">
-         <description>
-            %SuiteWizard.description
-         </description>
-         <keywordReference id="ru.capralow.dt.junit.wizards.java"/>
-      </wizard>
-   </extension>
-   <extension
-         point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            objectClass="org.eclipse.jdt.core.ICompilationUnit"
-            nameFilter="*Tests.java"
-            id="ru.capralow.dt.junit.wizards.UpdateTestSuite">
-         <action
-               label="%UpdateSuiteAction.label"
-               class="ru.capralow.dt.internal.junit.wizards.UpdateTestSuite"
-               tooltip="%UpdateSuiteAction.tooltip"
-               enablesFor="1"
-               id="updateTestSuite">
-         </action>
-      </objectContribution>
-   </extension>
-   <extension
-         point="org.eclipse.ui.actionSets">
-      <actionSet
-            label="%JUnitActionSet.label"
-            visible="false"
-            id="ru.capralow.dt.junit.JUnitActionSet">
-         <menu
-               label="%searchMenu.label"
-               path="navigate"
-               id="org.eclipse.search.menu">
-				<groupMarker name="internalDialogGroup"/>   <!-- not to be used by clients  -->
-				<groupMarker name="dialogGroup"/>           <!-- to be used by clients      -->
-				<separator name="fileSearchContextMenuActionsGroup"/> <!-- to be used by clients      -->
-	         	<separator name="contextMenuActionsGroup"/> <!-- to be used by clients -->
-	         	<separator name="occurencesActionsGroup"/> <!-- to be used by clients -->
-	         	<separator name="extraSearchGroup"/> <!-- to be used by clients -->
-         </menu>
+			<description>
+				%TestWizard.description
+			</description>
+			<keywordReference id="ru.capralow.dt.junit.wizards.java"/>
+		</wizard>
+		<wizard
+				name="%TestSuiteWizard.name"
+				icon="$nl$/icons/full/etool16/new_testsuite.png"
+				category="org.eclipse.jdt.ui.java/ru.capralow.dt.junit"
+				class="ru.capralow.dt.internal.junit.wizards.NewTestSuiteCreationWizard"
+				id="ru.capralow.dt.junit.wizards.NewTestSuiteCreationWizard">
+			<description>
+				%SuiteWizard.description
+			</description>
+			<keywordReference id="ru.capralow.dt.junit.wizards.java"/>
+		</wizard>
+	</extension>
+	
+	<extension
+			point="org.eclipse.ui.popupMenus">
+		<objectContribution
+				objectClass="org.eclipse.jdt.core.ICompilationUnit"
+				nameFilter="*Tests.java"
+				id="ru.capralow.dt.junit.wizards.UpdateTestSuite">
+			<action
+					label="%UpdateSuiteAction.label"
+					class="ru.capralow.dt.internal.junit.wizards.UpdateTestSuite"
+					tooltip="%UpdateSuiteAction.tooltip"
+					enablesFor="1"
+					id="updateTestSuite">
+			</action>
+		</objectContribution>
+	</extension>
+	
+	<extension
+			point="org.eclipse.ui.actionSets">
+		<actionSet
+				label="%JUnitActionSet.label"
+				visible="false"
+				id="ru.capralow.dt.junit.JUnitActionSet">
+			<menu
+					label="%searchMenu.label"
+					path="navigate"
+					id="org.eclipse.search.menu">
+				<groupMarker name="internalDialogGroup"/>	<!-- not to be used by clients  -->
+				<groupMarker name="dialogGroup"/>			  <!-- to be used by clients		-->
+				<separator name="fileSearchContextMenuActionsGroup"/> <!-- to be used by clients		-->
+					<separator name="contextMenuActionsGroup"/> <!-- to be used by clients -->
+					<separator name="occurencesActionsGroup"/> <!-- to be used by clients -->
+					<separator name="extraSearchGroup"/> <!-- to be used by clients -->
+			</menu>
 		<action
-               definitionId="ru.capralow.dt.junit.gotoTest"
-               label="%GotoTestAction.label"
-               helpContextId="ru.capralow.dt.junit.goto_referenced_test_action_context"
-               class="ru.capralow.dt.internal.junit.ui.GotoReferencedTestAction"
-               tooltip="%GotoTestAction.tooltip"
-               menubarPath="org.eclipse.search.menu/extraSearchGroup"
-               id="junit.actions.GotoTestAction">
-         </action>
-      </actionSet>
-   </extension>
-      <extension
-         point="org.eclipse.ui.actionSetPartAssociations">
-      <actionSetPartAssociation
-            targetID="ru.capralow.dt.junit.JUnitActionSet">
-         <part
-               id="org.eclipse.jdt.ui.PackageExplorer">
-         </part>
-         <part
-               id="org.eclipse.jdt.ui.TypeHierarchy">
-         </part>
-         <part
-               id="org.eclipse.jdt.ui.CompilationUnitEditor">
-         </part>
-         <part
-               id="org.eclipse.jdt.ui.ClassFileEditor">
-         </part>
-         <part
-               id="org.eclipse.jdt.ui.ProjectsView">
-         </part>
-         <part
-               id="org.eclipse.jdt.ui.PackagesView">
-         </part>
-         <part
-               id="org.eclipse.jdt.ui.TypesView">
-         </part>
-         <part
-               id="org.eclipse.jdt.ui.MembersView">
-         </part>
-         <part
-               id="org.eclipse.search.SearchResultView">
-         </part>
-      </actionSetPartAssociation>
-      <actionSetPartAssociation
-            targetID="org.eclipse.jdt.ui.JavaActionSet">
-         <part
-               id="ru.capralow.dt.junit.ResultView">
-         </part>
-      </actionSetPartAssociation>
-   </extension>
-   <extension
-         point="org.eclipse.debug.ui.launchShortcuts">
-      <shortcut
-            label="%JUnitShortcut.label"
-            icon="$nl$/icons/full/obj16/julaunch.png"
-            helpContextId="ru.capralow.dt.junit.launch_shortcut"
-            class="ru.capralow.dt.junit.launcher.JUnitLaunchShortcut"
-            modes="run, debug"
-            id="ru.capralow.dt.junit.junitShortcut">
-         <contextualLaunch>
-            <enablement>
-               <with variable="selection">
-                  <count value="1"/>
-               	  <iterate>
-                     <adapt type="org.eclipse.jdt.core.IJavaElement">
-                     	<and>
-		                	<test property="org.eclipse.jdt.core.isInJavaProject"/>
-		                	<or>
-		                	<test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="junit.framework.Test"/>
-		                	<test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="org.junit.platform.commons.annotation.Testable"/>
-		                	</or>
-		                	<test property="ru.capralow.dt.junit.canLaunchAsJUnit" forcePluginActivation="true"/>
-                  		</and>
-		             </adapt>
-		          </iterate>
-               </with>
-            </enablement>
-         </contextualLaunch>
-         <configurationType
-               id="ru.capralow.dt.junit.launchconfig">
-         </configurationType>
-         <description
-               description="%DebugJUnitLaunchShortcut.description"
-               mode="debug">
-         </description>
-         <description
-               description="%RunJUnitLaunchShortcut.description"
-               mode="run">
-         </description>
-      </shortcut>
-   </extension>
+					definitionId="ru.capralow.dt.junit.gotoTest"
+					label="%GotoTestAction.label"
+					helpContextId="ru.capralow.dt.junit.goto_referenced_test_action_context"
+					class="ru.capralow.dt.internal.junit.ui.GotoReferencedTestAction"
+					tooltip="%GotoTestAction.tooltip"
+					menubarPath="org.eclipse.search.menu/extraSearchGroup"
+					id="junit.actions.GotoTestAction">
+			</action>
+		</actionSet>
+	</extension>
+	
+	<extension
+		point="org.eclipse.ui.actionSetPartAssociations">
+		<actionSetPartAssociation
+				targetID="ru.capralow.dt.junit.JUnitActionSet">
+			<part
+					id="org.eclipse.jdt.ui.PackageExplorer">
+			</part>
+			<part
+					id="org.eclipse.jdt.ui.TypeHierarchy">
+			</part>
+			<part
+					id="org.eclipse.jdt.ui.CompilationUnitEditor">
+			</part>
+			<part
+					id="org.eclipse.jdt.ui.ClassFileEditor">
+			</part>
+			<part
+					id="org.eclipse.jdt.ui.ProjectsView">
+			</part>
+			<part
+					id="org.eclipse.jdt.ui.PackagesView">
+			</part>
+			<part
+					id="org.eclipse.jdt.ui.TypesView">
+			</part>
+			<part
+					id="org.eclipse.jdt.ui.MembersView">
+			</part>
+			<part
+					id="org.eclipse.search.SearchResultView">
+			</part>
+		</actionSetPartAssociation>
+		<actionSetPartAssociation
+				targetID="org.eclipse.jdt.ui.JavaActionSet">
+			<part
+					id="ru.capralow.dt.junit.ResultView">
+			</part>
+		</actionSetPartAssociation>
+	</extension>
+	
+	<extension
+			point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut
+				label="%JUnitShortcut.label"
+				icon="$nl$/icons/full/obj16/julaunch.png"
+				helpContextId="ru.capralow.dt.junit.launch_shortcut"
+				class="ru.capralow.dt.junit.launcher.JUnitLaunchShortcut"
+				modes="run, debug"
+				id="ru.capralow.dt.junit.junitShortcut">
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1"/>
+						  <iterate>
+							<adapt type="org.eclipse.jdt.core.IJavaElement">
+								<and>
+							 	<test property="org.eclipse.jdt.core.isInJavaProject"/>
+							 	<or>
+							 	<test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="junit.framework.Test"/>
+							 	<test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="org.junit.platform.commons.annotation.Testable"/>
+							 	</or>
+							 	<test property="ru.capralow.dt.junit.canLaunchAsJUnit" forcePluginActivation="true"/>
+								</and>
+						 </adapt>
+					 </iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType
+					id="ru.capralow.dt.junit.launchconfig">
+			</configurationType>
+			<description
+					description="%DebugJUnitLaunchShortcut.description"
+					mode="debug">
+			</description>
+			<description
+					description="%RunJUnitLaunchShortcut.description"
+					mode="run">
+			</description>
+		</shortcut>
+	</extension>
+	
+	<extension
+			point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator
+				markerType="org.eclipse.jdt.core.buildpath_problem"
+				class="ru.capralow.dt.internal.junit.buildpath.ClasspathVariableMarkerResolutionGenerator"
+				>
+				<attribute
+						name="id"
+						value="1010">
+						<!-- org.eclipse.jdt.core.IJavaModelMarker.ID,
+							  org.eclipse.jdt.core.IJavaModelStatusConstants.DEPRECATED_VARIABLE -->
+				</attribute>
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension
+			point="org.eclipse.ltk.core.refactoring.renameParticipants">
+		<renameParticipant
+				name="%RenameTypeParticipant.name"
+				class="ru.capralow.dt.internal.junit.refactoring.TypeRenameParticipant"
+				id="ru.capralow.dt.junit.renameTypeParticipant">
+			<enablement>
+			  <with variable="affectedNatures">
+				 <iterate operator="or">
+					<equals value="org.eclipse.jdt.core.javanature"/>
+				 </iterate>
+			  </with>
+			  <with variable="element">
+				 <instanceof value="org.eclipse.jdt.core.IType"/>
+				<test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="junit.framework.Test"/>
+				</with>
+			</enablement>
+		</renameParticipant>
+		<renameParticipant
+				class="ru.capralow.dt.internal.junit.refactoring.ProjectRenameParticipant"
+				name="%junitRenameParticipant"
+				id="ru.capralow.dt.junit.renameProjectParticipant">
+			<enablement>
+			  <with variable="affectedNatures">
+				 <iterate operator="or">
+					<equals value="org.eclipse.jdt.core.javanature"/>
+				 </iterate>
+			  </with>
+			  <with variable="element">
+					<instanceof value="org.eclipse.jdt.core.IJavaProject"/>
+				<test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="junit.framework.Test"/>
+			  </with>
+			</enablement>
+		</renameParticipant>
 
-   <extension
-         point="org.eclipse.jdt.ui.quickFixProcessors">
-      <quickFixProcessor
-            name="%junitQuickFixProcessor"
-            class="org.eclipse.jdt.internal.junit.ui.JUnitQuickFixProcessor"
-            id="ru.capralow.dt.junit.JUnitQuickFixProcessor">
-      </quickFixProcessor>
-   </extension>
+	</extension>
+	<extension
+			point="ru.capralow.dt.junit.junitLaunchConfigs">
+		<launchConfigType
+				configTypeID="ru.capralow.dt.junit.launchconfig">
+		</launchConfigType>
+	</extension>
 
-   <extension
-         point="org.eclipse.jdt.ui.classpathFixProcessors">
-      <classpathFixProcessor
-            name="%junitClasspathFixProcessor"
-            class="org.eclipse.jdt.internal.junit.ui.JUnitClasspathFixProcessor"
-            id="ru.capralow.dt.junit.JUnitClasspathFixProcessor">
-            <overrides
-                  id="org.eclipse.jdt.ui.text.correction.DefaultClasspathFixProcessor">
-            </overrides>
-      </classpathFixProcessor>
-   </extension>
+	<extension
+			point="org.eclipse.ui.commands">
+		<command
+			name="%GotoTestCommand.name"
+			description="%GotoTestCommand.description"
+			categoryId="org.eclipse.search.ui.category.search"
+			id="ru.capralow.dt.junit.gotoTest">
+		</command>
+		<command
+				name="%JUnitShortcut.description.run"
+				description="%JUnitShortcut.description.run"
+				categoryId="org.eclipse.debug.ui.category.run"
+				id="ru.capralow.dt.junit.junitShortcut.run">
+		</command>
+		<command
+				name="%JUnitShortcut.description.debug"
+				description="%JUnitShortcut.description.debug"
+				categoryId="org.eclipse.debug.ui.category.run"
+				id="ru.capralow.dt.junit.junitShortcut.debug">
+		</command>
+		<command
+				name="%JUnitShortcut.description.rerunLast"
+				description="%JUnitShortcut.description.rerunLast"
+				categoryId="org.eclipse.debug.ui.category.run"
+				id="ru.capralow.dt.junit.junitShortcut.rerunLast">
+		</command>
+		<command
+				name="%JUnitShortcut.description.rerunFailedFirst"
+				description="%JUnitShortcut.description.rerunFailedFirst"
+				categoryId="org.eclipse.debug.ui.category.run"
+				id="ru.capralow.dt.junit.junitShortcut.rerunFailedFirst">
+		</command>
+	</extension>
 
-   <extension
-         point="org.eclipse.ui.ide.markerResolution">
-      <markerResolutionGenerator
-            markerType="org.eclipse.jdt.core.buildpath_problem"
-            class="ru.capralow.dt.internal.junit.buildpath.ClasspathVariableMarkerResolutionGenerator"
-            >
-            <attribute
-                  name="id"
-                  value="1010">
-                  <!-- org.eclipse.jdt.core.IJavaModelMarker.ID,
-                       org.eclipse.jdt.core.IJavaModelStatusConstants.DEPRECATED_VARIABLE -->
-            </attribute>
-      </markerResolutionGenerator>
-   </extension>
+	<extension
+			point="org.eclipse.ui.bindings">
+		<key
+				sequence="M2+M3+D T"
+				commandId="ru.capralow.dt.junit.junitShortcut.debug"
+				schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+		<!-- On carbon: Shift+Option+D is a character, Command+Option+D is Show/Hide Dock, Command+Control+D is dictionary lookup -->
+		<key
+				platform="carbon"
+				sequence="M2+M3+D T"
+				schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+		<key
+				platform="carbon"
+				sequence="M1+M3+M4+D T"
+				commandId="ru.capralow.dt.junit.junitShortcut.debug"
+				schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+		<key
+				sequence="M2+M3+X T"
+				commandId="ru.capralow.dt.junit.junitShortcut.run"
+				schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+		<key
+				platform="carbon"
+				sequence="M2+M3+X T"
+				schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+		<key
+				platform="carbon"
+				sequence="M1+M3+X T"
+				commandId="ru.capralow.dt.junit.junitShortcut.run"
+				schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+	</extension>
 
-   <extension
-         point="org.eclipse.ltk.core.refactoring.renameParticipants">
-      <renameParticipant
-            name="%RenameTypeParticipant.name"
-            class="ru.capralow.dt.internal.junit.refactoring.TypeRenameParticipant"
-            id="ru.capralow.dt.junit.renameTypeParticipant">
-         <enablement>
-           <with variable="affectedNatures">
-             <iterate operator="or">
-               <equals value="org.eclipse.jdt.core.javanature"/>
-             </iterate>
-           </with>
-           <with variable="element">
-             <instanceof value="org.eclipse.jdt.core.IType"/>
- 	         <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="junit.framework.Test"/>
-            </with>
-         </enablement>
-      </renameParticipant>
-      <renameParticipant
-            class="ru.capralow.dt.internal.junit.refactoring.ProjectRenameParticipant"
-            name="%junitRenameParticipant"
-            id="ru.capralow.dt.junit.renameProjectParticipant">
-         <enablement>
-           <with variable="affectedNatures">
-             <iterate operator="or">
-               <equals value="org.eclipse.jdt.core.javanature"/>
-             </iterate>
-           </with>
-           <with variable="element">
-   	         <instanceof value="org.eclipse.jdt.core.IJavaProject"/>
-	         <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="junit.framework.Test"/>
-           </with>
-         </enablement>
-      </renameParticipant>
+	 <!-- JUnit Container -->
 
-   </extension>
-   <extension
-         point="ru.capralow.dt.junit.junitLaunchConfigs">
-      <launchConfigType
-            configTypeID="ru.capralow.dt.junit.launchconfig">
-      </launchConfigType>
-   </extension>
+	<extension
+			point="org.eclipse.ui.editors">
+		<editor
+				default="false"
+				id="ru.capralow.dt.junit.JUnitResultEditor"
+				icon="$nl$/icons/full/obj16/testfile_obj.png"
+				launcher="ru.capralow.dt.internal.junit.ui.JUnitViewEditorLauncher"
+				name="%JUnitView.editor.name">
+			<contentTypeBinding
+					contentTypeId="ru.capralow.dt.junit.JUnitResult">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension
+			point="org.eclipse.debug.core.statusHandlers">
+		<statusHandler
+				class="ru.capralow.dt.internal.junit.launcher.LaunchErrorStatusHandler"
+				code="101"
+				id="ru.capralow.dt.junit.launch.ERR_UNSPECIFIED_MAIN_TYPE"
+				plugin="ru.capralow.dt.junit.core">
+		</statusHandler>
+		<statusHandler
+				class="ru.capralow.dt.internal.junit.launcher.LaunchErrorStatusHandler"
+				code="118"
+				id="ru.capralow.dt.junit.launch.ERR_NO_SOCKET_AVAILABLE"
+				plugin="ru.capralow.dt.junit.core">
+		</statusHandler>
+		<statusHandler
+				class="ru.capralow.dt.internal.junit.launcher.LaunchErrorStatusHandler"
+				code="107"
+				id="ru.capralow.dt.junit.launch.ERR_NOT_A_JAVA_PROJECT"
+				plugin="ru.capralow.dt.junit.core">
+		</statusHandler>
+		<statusHandler
+				class="ru.capralow.dt.internal.junit.launcher.LaunchErrorStatusHandler"
+				code="10004"
+				id="ru.capralow.dt.junit.launch.ERR_JUNIT_NOT_ON_PATH"
+				plugin="ru.capralow.dt.junit.core">
+		</statusHandler>
+	</extension>
 
-   <extension
-         point="org.eclipse.ui.commands">
-      <command
-         name="%GotoTestCommand.name"
-         description="%GotoTestCommand.description"
-         categoryId="org.eclipse.search.ui.category.search"
-         id="ru.capralow.dt.junit.gotoTest">
-      </command>
-      <command
-            name="%JUnitShortcut.description.run"
-            description="%JUnitShortcut.description.run"
-            categoryId="org.eclipse.debug.ui.category.run"
-            id="ru.capralow.dt.junit.junitShortcut.run">
-      </command>
-      <command
-            name="%JUnitShortcut.description.debug"
-            description="%JUnitShortcut.description.debug"
-            categoryId="org.eclipse.debug.ui.category.run"
-            id="ru.capralow.dt.junit.junitShortcut.debug">
-      </command>
-      <command
-            name="%JUnitShortcut.description.rerunLast"
-            description="%JUnitShortcut.description.rerunLast"
-            categoryId="org.eclipse.debug.ui.category.run"
-            id="ru.capralow.dt.junit.junitShortcut.rerunLast">
-      </command>
-      <command
-            name="%JUnitShortcut.description.rerunFailedFirst"
-            description="%JUnitShortcut.description.rerunFailedFirst"
-            categoryId="org.eclipse.debug.ui.category.run"
-            id="ru.capralow.dt.junit.junitShortcut.rerunFailedFirst">
-      </command>
-   </extension>
-
-   <extension
-         point="org.eclipse.ui.bindings">
-      <key
-            sequence="M2+M3+D T"
-            commandId="ru.capralow.dt.junit.junitShortcut.debug"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
-      <!-- On carbon: Shift+Option+D is a character, Command+Option+D is Show/Hide Dock, Command+Control+D is dictionary lookup -->
-      <key
-            platform="carbon"
-            sequence="M2+M3+D T"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
-      <key
-            platform="carbon"
-            sequence="M1+M3+M4+D T"
-            commandId="ru.capralow.dt.junit.junitShortcut.debug"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
-      <key
-            sequence="M2+M3+X T"
-            commandId="ru.capralow.dt.junit.junitShortcut.run"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
-      <key
-            platform="carbon"
-            sequence="M2+M3+X T"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
-      <key
-            platform="carbon"
-            sequence="M1+M3+X T"
-            commandId="ru.capralow.dt.junit.junitShortcut.run"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
-   </extension>
-
-    <!-- JUnit Container -->
-
-   <extension
-         point="org.eclipse.jdt.ui.classpathContainerPage">
-      <classpathContainerPage
-            name="%JUnitContainerName"
-            class="ru.capralow.dt.internal.junit.buildpath.JUnitContainerWizardPage"
-            id="ru.capralow.dt.junit.JUNIT_CONTAINER">
-      </classpathContainerPage>
-   </extension>
-
-   <extension
-         point="org.eclipse.ui.editors">
-      <editor
-            default="false"
-            id="ru.capralow.dt.junit.JUnitResultEditor"
-            icon="$nl$/icons/full/obj16/testfile_obj.png"
-            launcher="ru.capralow.dt.internal.junit.ui.JUnitViewEditorLauncher"
-            name="%JUnitView.editor.name">
-         <contentTypeBinding
-               contentTypeId="ru.capralow.dt.junit.JUnitResult">
-         </contentTypeBinding>
-      </editor>
-   </extension>
-   <extension
-         point="org.eclipse.debug.core.statusHandlers">
-      <statusHandler
-            class="ru.capralow.dt.internal.junit.launcher.LaunchErrorStatusHandler"
-            code="101"
-            id="ru.capralow.dt.junit.launch.ERR_UNSPECIFIED_MAIN_TYPE"
-            plugin="ru.capralow.dt.junit.core">
-      </statusHandler>
-      <statusHandler
-            class="ru.capralow.dt.internal.junit.launcher.LaunchErrorStatusHandler"
-            code="118"
-            id="ru.capralow.dt.junit.launch.ERR_NO_SOCKET_AVAILABLE"
-            plugin="ru.capralow.dt.junit.core">
-      </statusHandler>
-      <statusHandler
-            class="ru.capralow.dt.internal.junit.launcher.LaunchErrorStatusHandler"
-            code="107"
-            id="ru.capralow.dt.junit.launch.ERR_NOT_A_JAVA_PROJECT"
-            plugin="ru.capralow.dt.junit.core">
-      </statusHandler>
-      <statusHandler
-            class="ru.capralow.dt.internal.junit.launcher.LaunchErrorStatusHandler"
-            code="10004"
-            id="ru.capralow.dt.junit.launch.ERR_JUNIT_NOT_ON_PATH"
-            plugin="ru.capralow.dt.junit.core">
-      </statusHandler>
-   </extension>
-
-   <extension
-         point="ru.capralow.dt.junit.testRunListeners">
-      <testRunListener
-            class="org.eclipse.jdt.internal.junit.ui.UITestRunListener">
-      </testRunListener>
-   </extension>
-   <extension
-         point="org.eclipse.ui.themes">
-      <fontDefinition
-            categoryId="org.eclipse.jdt.ui.presentation"
-            id="ru.capralow.dt.junit.failurePaneFont"
-            label="%FailureTraceFont.label">
-         <description>
-            %FailureTraceFont.description
-         </description>
-      </fontDefinition>
-   </extension>
+	<extension
+			point="ru.capralow.dt.junit.testRunListeners">
+		<testRunListener
+				class="org.eclipse.jdt.internal.junit.ui.UITestRunListener">
+		</testRunListener>
+	</extension>
+	
+	<extension
+			point="org.eclipse.ui.themes">
+		<fontDefinition
+				categoryId="org.eclipse.jdt.ui.presentation"
+				id="ru.capralow.dt.junit.failurePaneFont"
+				label="%FailureTraceFont.label">
+			<description>
+				%FailureTraceFont.description
+			</description>
+		</fontDefinition>
+	</extension>
+	
 </plugin>

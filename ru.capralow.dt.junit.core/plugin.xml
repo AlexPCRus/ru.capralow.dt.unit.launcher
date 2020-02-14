@@ -15,11 +15,10 @@
             delegate="ru.capralow.dt.junit.launcher.AdvancedJUnitLaunchConfigurationDelegate"
             modes="run, debug"
             id="ru.capralow.dt.junit.launchconfig"
-            sourceLocatorId="org.eclipse.jdt.launching.sourceLocator.JavaSourceLookupDirector"
-            sourcePathComputerId="org.eclipse.jdt.launching.sourceLookup.javaSourcePathComputer"
             migrationDelegate="ru.capralow.dt.internal.junit.launcher.JUnitMigrationDelegate">
       </launchConfigurationType>
    </extension>
+   
    <extension
          point="org.eclipse.debug.core.launchConfigurationComparators">
       <launchConfigurationComparator
@@ -30,22 +29,6 @@
    </extension>
    
    <extension
-         point="org.eclipse.jdt.core.classpathVariableInitializer">
-      <classpathVariableInitializer
-            variable="JUNIT_HOME"
-            class="ru.capralow.dt.internal.junit.buildpath.JUnitHomeInitializer"
-            deprecated="%classpathVariableInitializer.deprecated.JUNIT_HOME"
-            readOnly="true">
-      </classpathVariableInitializer>
-      <classpathVariableInitializer
-            variable="JUNIT_SRC_HOME"
-            class="ru.capralow.dt.internal.junit.buildpath.JUnitHomeInitializer"
-            deprecated="%classpathVariableInitializer.deprecated.JUNIT_SRC_HOME"
-            readOnly="true">
-      </classpathVariableInitializer>
-   </extension>
-         
-   <extension
          point="org.eclipse.core.expressions.propertyTesters">
       <propertyTester
             properties="isTest,canLaunchAsJUnit"
@@ -55,7 +38,7 @@
             id="ru.capralow.dt.junit.JUnitPropertyTester">
       </propertyTester>
    </extension>
-
+   
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer class="ru.capralow.dt.internal.junit.JunitPreferenceInitializer"/>
@@ -106,6 +89,7 @@
          <runtimeClasspathEntry pluginId="ru.capralow.dt.junit.runtime" />
       </kind>
    </extension>
+   
    <extension
          point="org.eclipse.core.contenttype.contentTypes">
       <content-type
@@ -130,5 +114,6 @@
             </parameter>
          </describer>
       </content-type>
-   </extension>   
+   </extension>
+   
 </plugin>
